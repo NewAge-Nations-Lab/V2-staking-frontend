@@ -4,7 +4,7 @@ import aboutImage from '../images/about-us.jpg';
 function AboutUs() {
   return (
     <div className='mb-5'>
-      <header>
+      <header style={{border: "2px solid"}}>
         <h1 className='page-title'>About Us</h1>
       </header>
 

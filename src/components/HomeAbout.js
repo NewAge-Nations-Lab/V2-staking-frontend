@@ -6,7 +6,7 @@ function HomeAbout() {
   return (
     <div className='container'>
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-6" style={{border: '2px red solid'}}>
           <div className="h-100 p-5 website-red text-white rounded-3">
             <h2>About us</h2>
 
@@ -21,7 +21,7 @@ function HomeAbout() {
            <small>As a reputable entity, we specialize in crafting secure and lucrative applications designed specifically for cryptocurrency investors. With a focus on reliability and profitability, our offerings cater to the diverse needs of our discerning clientele, ensuring satisfaction and success in their investment endeavors.</small>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6" style={{border: '2px red solid'}}>
         <img src={logo} alt="Logo" width={700} height={500}/>
            
           

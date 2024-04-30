@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import { FaTwitter, FaTelegram, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 
 function Footer() {
   const date = new Date();
@@ -57,6 +58,19 @@ function Footer() {
             <br/>
             
             </small>
+
+            <div className="bottom-icon-container">
+                    <a href="https://twitter.com/newagenations" target='_blank'><FaTwitter className="bottom-icon " /></a>
+                    <a href="https://t.me/newagenations" target='_blank'><FaTelegram className="bottom-icon " /></a>
+                    <a href="https://facebook.com/newagenations" target='_blank'><FaFacebook className="bottom-icon " /></a>
+                    <a href="https://instagram.com/newagenations" target='_blank'><FaInstagram className="bottom-icon " /></a>
+                    <a href="https://www.youtube.com/@NewAgeNations-fe8vg" target='_blank'><FaYoutube className="bottom-icon " /></a>
+
+
+
+
+
+                </div>
             
         </div>
         <div className="col-6 col-md">
