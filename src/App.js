@@ -10,9 +10,9 @@ import Slogan from "./components/Slogan";
 import Footer from "./components/Footer";
 import HomeAbout from "./components/HomeAbout";
 import Gallery from "./pages/Gallery";
-import Dashboard from "./pages/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import AuthForm from "./components/AuthForm";
+import Dashboard from "./pages/Dashboard";
 
 
 

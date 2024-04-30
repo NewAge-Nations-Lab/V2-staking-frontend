@@ -1,6 +1,4 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+
 
 footer {
   background: #a71930;
@@ -166,7 +164,7 @@ li:hover {
   border-bottom: 2px #232c57 solid;
 }
 
-.card {
+.cards {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -177,7 +175,7 @@ li:hover {
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.card:hover {
+.cards:hover {
   box-shadow: 0px 8px 16px #1f2152;
 }
 

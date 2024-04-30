@@ -42,7 +42,7 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <Link
-                to="/dashboard"
+                to="/Dashboard"
                 className="nav-link text-light"
                 style={{ fontSize: "16px", margin: "10px" }}
                 onClick={handleLinkClick}
@@ -63,7 +63,7 @@ function NavBar() {
             </li>
             <li className="nav-item">
                 <a
-                  href="#"
+                  href="/"
                   alt="contact us"
                   className="nav-link text-light"
                   style={{ fontSize: "16px", margin: "10px" }}

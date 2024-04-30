@@ -3,7 +3,7 @@ import BalanceOverview from '../components/BalanceOverview';
 
 
 
-function DashBoard() {
+function Dashboard() {
     
 
 
@@ -67,15 +67,15 @@ function DashBoard() {
                     </div>
 
                     <div className='col-md-6 d-flex flex-column align-items-center'>
-                        <div className='card d-flex w-100 w-md-auto'>
+                        <div className='cards d-flex w-100 w-md-auto'>
                             <p>Stake amount:</p>
                             <p>455 NAC</p>
                         </div>
-                        <div className='card d-flex w-100 w-md-auto'>
+                        <div className='cards d-flex w-100 w-md-auto'>
                             <p>Lock Period:</p>
                             <p>78</p>
                         </div>
-                        <div className='card d-flex w-100 w-md-auto'>
+                        <div className='cards d-flex w-100 w-md-auto'>
                             <p>Available Reward:</p>
                             <p>456 NAC</p>
                         </div>
@@ -125,4 +125,4 @@ function DashBoard() {
     );
 }
 
-export default DashBoard ;
+export default Dashboard;
