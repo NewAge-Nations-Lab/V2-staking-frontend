@@ -60,11 +60,11 @@ function Footer() {
             </small>
 
             <div className="bottom-icon-container">
-                    <a href="https://twitter.com/newagenations" target='_blank'><FaTwitter className="bottom-icon " /></a>
-                    <a href="https://t.me/newagenations" target='_blank'><FaTelegram className="bottom-icon " /></a>
-                    <a href="https://facebook.com/newagenations" target='_blank'><FaFacebook className="bottom-icon " /></a>
-                    <a href="https://instagram.com/newagenations" target='_blank'><FaInstagram className="bottom-icon " /></a>
-                    <a href="https://www.youtube.com/@NewAgeNations-fe8vg" target='_blank'><FaYoutube className="bottom-icon " /></a>
+                    <a href="https://twitter.com/newagenations" target='_blank' rel="noreferrer"><FaTwitter className="bottom-icon " /></a>
+                    <a href="https://t.me/newagenations" target='_blank' rel="noreferrer"><FaTelegram className="bottom-icon " /></a>
+                    <a href="https://facebook.com/newagenations" target='_blank' rel="noreferrer"><FaFacebook className="bottom-icon " /></a>
+                    <a href="https://instagram.com/newagenations" target='_blank' rel="noreferrer"><FaInstagram className="bottom-icon " /></a>
+                    <a href="https://www.youtube.com/@NewAgeNations-fe8vg" target='_blank' rel="noreferrer"><FaYoutube className="bottom-icon " /></a>
 
 
 
