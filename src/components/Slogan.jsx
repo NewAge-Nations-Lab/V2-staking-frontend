@@ -10,7 +10,7 @@ function Slogan() {
         <FaBeer />
           {/* <svg className="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg> */}
         </div>
-        <h5 className="fs-2 text-body-emphasis">Putting you first makes us the best</h5>
+        <h5 className="fs-2 text-body-emphasis">TOTAL SUPPLY- 21 Million NAC</h5>
         
       </div>
       <div className="feature col">
@@ -18,7 +18,7 @@ function Slogan() {
           {/* <svg className="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg> */}
           <FaBeer />
         </div>
-        <h5 className="fs-2 text-body-emphasis">Secured <br/>profitable and quality</h5>
+        <h5 className="fs-2 text-body-emphasis">Secured <br/>TRANSACTION FEES - 10%</h5>
        
       </div>
       <div className="feature col">
@@ -26,7 +26,7 @@ function Slogan() {
         <FaBeer />
           {/* <svg className="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg> */}
         </div>
-        <h5 className="fs-2 text-body-emphasis">User friendly users interface</h5>
+        <h5 className="fs-2 text-body-emphasis">HVTS SUBSCRIPTION-STAKING</h5>
         
         
       </div>
@@ -36,7 +36,7 @@ function Slogan() {
         <FaBeer />
           {/* <svg className="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg> */}
         </div>
-        <h5 className="fs-2 text-body-emphasis">Administering the right services is our priority</h5>
+        <h5 className="fs-2 text-body-emphasis">NAC DUAL STAKING</h5>
         
         
       </div>

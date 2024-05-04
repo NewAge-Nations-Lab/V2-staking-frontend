@@ -96,11 +96,10 @@ function Footer() {
           <ul className="list-unstyled text-small">
             <li>Team</li>
             <li>Locations</li>
-            <li>Privacy</li>
-            <li>Terms</li>
+            <li>Disclaimer</li>
           </ul>
         </div>
-        <p className=" text-white">copyright© {year}</p>
+        <p className=" text-white">copyright© {year} :NewAge Nations DAO</p>
       </div>
     </footer>
   );

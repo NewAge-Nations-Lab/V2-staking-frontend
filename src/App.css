@@ -205,6 +205,54 @@ li:hover {
   border-radius: 10px;
 }
 
+.staking-input{
+  border-radius: 10px;
+  height: 50px;
+  border: none;
+  background-color: #e8e8e8;
+  margin-bottom: 10px;
+}
+
+.staking-btn {
+  background-color: #232c57;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+.primary-color {
+  color: #232c57;
+}
+
+/* the amount button to automatically fill the amount on the input */
+
+.mr-2 {
+  margin: 5px;
+  border: none;
+  background-color: rgb(234, 234, 234);
+  border-radius: 5px;
+  height: 40px;
+  width: 100px;
+}
+
+.ml-2 {
+  margin: 5px;
+  border: none;
+  background-color: rgb(234, 234, 234);
+  border-radius: 5px;
+  height: 40px;
+  width: 50px;
+}
+
+.profit-estimate{
+  border-left: 2px solid rgb(234, 234, 234);
+  padding: 5px;
+  width: 200px;
+  color: #232c57;
+}
+
 h3 {
   margin-top: 0;
 }
