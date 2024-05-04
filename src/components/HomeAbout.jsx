@@ -14,11 +14,11 @@ function HomeAbout() {
               <li>Stake NAC and earn DAI and NAC</li>
               <li>Buy NAC with our efficient P2P services</li>
             </ul>
-            <small>As a reputable entity, we specialize in crafting secure and lucrative applications designed specifically for cryptocurrency investors. With a focus on reliability and profitability, our offerings cater to the diverse needs of our discerning clientele, ensuring satisfaction and success in their investment endeavors.</small>
+            {/* <small>As a reputable entity, we specialize in crafting secure and lucrative applications designed specifically for cryptocurrency investors. With a focus on reliability and profitability, our offerings cater to the diverse needs of our discerning clientele, ensuring satisfaction and success in their investment endeavors.</small> */}
           </div>
         </div>
         <div className="col-md-6">
-          <div className='text-center'>
+          <div className='text-center referal-container'>
             <img src={referalImage} alt='Referral Bonus' width={250} height={200} />
             <h3 style={{ fontFamily: 'Arial, sans-serif', color: '#1a1a1a' }}>Unlock a Rewarding Opportunity</h3>
             <p>Empower your network and reap the benefits with our exclusive Referrer Bonus. Refer a friend to our platform and enjoy a lucrative 10% bonus from their investment, adding value to both your portfolio and theirs.</p>

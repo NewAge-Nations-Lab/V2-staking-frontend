@@ -257,6 +257,10 @@ h3 {
   margin-top: 0;
 }
 
+.referal-container{
+  padding: 30px;
+}
+
 @media (max-width: 768px) {
   .balance-block, .stake-block {
     width: 100%;
