@@ -40,16 +40,7 @@ function NavBar() {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                to="/Dashboard"
-                className="nav-link text-light"
-                style={{ fontSize: "16px", margin: "10px" }}
-                onClick={handleLinkClick}
-              >
-                Dashboard
-              </Link>
-            </li>
+            
 
             <li className="nav-item">
               <Link
@@ -76,17 +67,17 @@ function NavBar() {
             <ul className="navbar-nav">
             <li className="nav-item">
               <Link
-                to="/AuthForm"
+                to="/Login"
                 className="nav-link text-light nav-link-hover"
                 style={{ fontSize: "16px", margin: "10px" }}
                 onClick={handleLinkClick}
               >
-                Sign in
+                Login
               </Link>
             </li>
             <li className="nav-item">
               <Link
-                to="/AuthForm"
+                to="/Registration"
                 className="nav-link text-light nav-link-hover"
                 style={{ fontSize: "16px", margin: "10px" }}
                 onClick={handleLinkClick}

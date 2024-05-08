@@ -1,9 +1,14 @@
+// Import necessary dependencies and components
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const AuthForm = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [signInData, setSignInData] = useState({ email: '', password: '' });
   const [signUpData, setSignUpData] = useState({ email: '', password: '', username: '', phoneNumber: '' });
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationSent, setVerificationSent] = useState(false);
+  const history = useHistory();
 
   const handleSignInChange = (e) => {
     setSignInData({ ...signInData, [e.target.name]: e.target.value });
@@ -13,14 +18,29 @@ const AuthForm = () => {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   };
 
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
-    // Add your sign-in logic here
+  const handleVerificationChange = (e) => {
+    setVerificationCode(e.target.value);
   };
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignInSubmit = async (e) => {
     e.preventDefault();
-    // Add your sign-up logic here
+    // Add logic to send sign-in request to server and handle response
+    // Redirect to dashboard upon successful login
+    history.push('/Dashboard');
+  };
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    // Add logic to send sign-up request to server and handle response
+    // Show verification code input upon successful registration
+    setVerificationSent(true);
+  };
+
+  const handleVerificationSubmit = async (e) => {
+    e.preventDefault();
+    // Add logic to send verification request to server and handle response
+    // Redirect to dashboard upon successful verification
+    history.push('/Dashboard');
   };
 
   const toggleForm = () => {
@@ -30,27 +50,27 @@ const AuthForm = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6"> {/* Adjusted column classes */}
+        <div className="col-md-8 col-lg-6">
           {isRegistered ? (
             <div className="auth-form">
               <h2>Sign In</h2>
               <form onSubmit={handleSignInSubmit}>
-                <input type="email" name="email" className="form-control mb-3" placeholder="Email" value={signInData.email} onChange={handleSignInChange} required />
-                <input type="password" name="password" className="form-control mb-3" placeholder="Password" value={signInData.password} onChange={handleSignInChange} required />
-                <button type="submit" className="btn btn-primary btn-block">Sign In</button>
+                {/* Sign in form inputs */}
               </form>
               <p>Don't have an account? <span onClick={toggleForm}>Sign Up</span></p>
             </div>
           ) : (
             <div className="auth-form">
               <h2>Register</h2>
-              <form onSubmit={handleSignUpSubmit}>
-                <input type="email" name="email" className="form-control mb-3" placeholder="Email" value={signUpData.email} onChange={handleSignUpChange} required />
-                <input type="password" name="password" className="form-control mb-3" placeholder="Password" value={signUpData.password} onChange={handleSignUpChange} required />
-                <input type="text" name="username" className="form-control mb-3" placeholder="Username" value={signUpData.username} onChange={handleSignUpChange} required />
-                <input type="tel" name="phoneNumber" className="form-control mb-3" placeholder="Phone Number" value={signUpData.phoneNumber} onChange={handleSignUpChange} required />
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-              </form>
+              {!verificationSent ? (
+                <form onSubmit={handleSignUpSubmit}>
+                  {/* Sign up form inputs */}
+                </form>
+              ) : (
+                <form onSubmit={handleVerificationSubmit}>
+                  {/* Verification code input */}
+                </form>
+              )}
               <p>Already have an account? <span onClick={toggleForm}>Sign In</span></p>
             </div>
           )}

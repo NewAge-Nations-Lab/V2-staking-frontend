@@ -11,10 +11,10 @@ import Footer from "./components/Footer";
 import HomeAbout from "./components/HomeAbout";
 import Gallery from "./pages/Gallery";
 import AboutUs from "./pages/AboutUs";
-import AuthForm from "./components/AuthForm";
-import Dashboard from "./pages/Dashbod";
-
-
+import Dashboard from "./pages/Dashboard";
+import RegistrationForm from "./components/RegistrationForm";
+import LoginForm from "./components/LoginForm";
+import VerificationForm from "./components/VerificationForm";
 
 
 
@@ -43,8 +43,14 @@ function App() {
         <Route path="/AboutUs">
           <AboutUs />
         </Route>
-        <Route path="/AuthForm">
-          <AuthForm />
+        <Route path="/Registration">
+          <RegistrationForm />
+        </Route>
+        <Route path="/Login">
+          <LoginForm />
+        </Route>
+        <Route path="/Verification">
+          <VerificationForm />
         </Route>
         
         
