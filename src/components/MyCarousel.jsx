@@ -26,7 +26,7 @@ function MyCarousel() {
               <h1>Empowering Futures, Enriching Lives</h1>
               <p className="opacity-75 slide-p-size">Your Trusted cryptocurrency platform investment for Compassionate
                 investors</p>
-                <p><Link className="btn btn-lg btn-danger" to="/AuthForm">Sign up today</Link></p>
+                <p><Link className="btn btn-lg btn-danger" to="/Registration">Sign up today</Link></p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ function MyCarousel() {
               <h1>Newage coin staking - Nurturing Dreams, Transforming Wealth</h1>
               <p className="opacity-75 slide-p-size" >"24/7 Service for Cryptocurrency
                 investors, Earn in Dai and Nac every day."</p>
-                <p><Link className="btn btn-lg btn-danger" to="/AuthForm">Sign up today</Link></p>
+                <p><Link className="btn btn-lg btn-danger" to="/Registration">Sign up today</Link></p>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ function MyCarousel() {
             <div className="carousel-caption text-end">
               <h1>Newage coin staking.</h1>
               <p className="opacity-75 slide-p-size">"Embark on a journey of holistic investment, where each service orchestrates a harmonious symphony of well-being."</p>
-                <p><Link className="btn btn-lg btn-danger" to="/AuthForm">Sign up today</Link></p>
+                <p><Link className="btn btn-lg btn-danger" to="/Registration">Sign up today</Link></p>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ function MyCarousel() {
             <div className="carousel-caption">
               <h1>Stake and Earn in NAC & DAI</h1>
               <p className="opacity-75 slide-p-size">You can start earning daily percentage in NAC and DAI today</p>
-              <p><Link className="btn btn-lg btn-danger" to="/AuthForm">Sign up today</Link></p>
+              <p><Link className="btn btn-lg btn-danger" to="/Registration">Sign up today</Link></p>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@ function MyCarousel() {
             <div className="carousel-caption">
               <h1>Our Specialty</h1>
               <p className="opacity-75 slide-p-size">We specialize in providing top-notch staking investment services, catering to a diverse range of needs</p>
-              <p><Link className="btn btn-lg btn-danger" to="/AuthForm">Sign up today</Link></p>
+              <p><Link className="btn btn-lg btn-danger" to="/Registration">Sign up today</Link></p>
             </div>
           </div>
         </div>
