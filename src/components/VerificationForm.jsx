@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'; // Import the ThreeDots loader component
 import { FaCheckCircle } from 'react-icons/fa'; // Import the FaCheckCircle icon for success
 
-const VerificationForm = ({ userId }) => {
+const VerificationForm = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false); // State to track loading state
   const [verificationSuccess, setVerificationSuccess] = useState(false); // State to track verification success
+  const [userId, setUserId] = useState(null); // State to store the user ID
   const history = useHistory();
+
+  useEffect(() => {
+    // Fetch the user ID from the response of the registration route
+    axios.post('https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/register')
+      .then(response => {
+        const { userId } = response.data;
+        setUserId(userId);
+      })
+      .catch(error => {
+        console.error('Error fetching user ID:', error);
+      });
+  }, []); // Run this effect only once, on component mount
 
   const handleInputChange = (e) => {
     setVerificationCode(e.target.value);
@@ -20,7 +33,7 @@ const VerificationForm = ({ userId }) => {
     setLoading(true); // Set loading state to true when verification request starts
     try {
       const response = await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify/${userId}`, { code: verificationCode });
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Verification succeeded
         setVerificationSuccess(true);
         // Redirect to dashboard after successful verification
@@ -36,7 +49,7 @@ const VerificationForm = ({ userId }) => {
   };
 
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container mt-5">
       <div className="card mx-auto" style={{ maxWidth: '400px' }}>
         <div className="card-body">
           <h2 className="card-title text-center">Verification</h2>
