@@ -1,7 +1,8 @@
+// VerificationForm.js
+
 import React, { useState } from 'react';
-import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
-import { FaCheckCircle } from 'react-icons/fa';
+import { makeAuthenticatedRequest } from '../api'; 
 
 const VerificationForm = () => {
   const [verificationCode, setVerificationCode] = useState('');
@@ -12,12 +13,13 @@ const VerificationForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(
-        `https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify`,
+      const response = await makeAuthenticatedRequest(
+        'https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify',
+        'POST',
         { verifyCode: verificationCode }
       );
       console.log(verificationCode);
-      if (response.status === 201) {
+      if (response && response.status === 201) {
         // Verification Successful
         // You might want to handle this case if needed
       } else {
@@ -50,11 +52,7 @@ const VerificationForm = () => {
             />
             <button type="submit" className="submit-btn" disabled={loading}>
               {loading ? (
-                <ThreeDots
-                  color="#ffffff"
-                  height={20}
-                  width={20}
-                />
+                <ThreeDots color="#ffffff" height={20} width={20} />
               ) : (
                 'Verify'
               )}
