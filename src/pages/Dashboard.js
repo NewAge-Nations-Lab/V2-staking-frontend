@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Dashboard() {
-    const [amount, setAmount] = useState('0');
+    const [amount, setAmount] = useState('');
     const [dailyReturn, setDailyReturn] = useState(0);
     const [weeklyReturn, setWeeklyReturn] = useState(0);
     const [monthlyReturn, setMonthlyReturn] = useState(0);
@@ -40,7 +40,7 @@ function Dashboard() {
     }
 
     const calculateReturns = (stakedAmount) => {
-        const daily = stakedAmount * 0.005 / 7; // 0.5% daily return
+        const daily = stakedAmount * 0.005; // 0.5% daily return
         const weekly = daily * 7; // Assuming 7 days in a week
         const monthly = weekly * 4; // Assuming 4 weeks in a month
         const yearly = monthly * 12; // Assuming 12 months in a year
@@ -49,6 +49,7 @@ function Dashboard() {
         setMonthlyReturn(monthly.toFixed(2));
         setYearlyReturn(yearly.toFixed(2));
     }
+    
 
     const handleStaking = async () => {
         // Implement staking logic here if needed
