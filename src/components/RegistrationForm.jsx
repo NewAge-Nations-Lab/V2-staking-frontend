@@ -18,7 +18,10 @@ const RegistrationForm = ({ onLoginClick }) => {
     try {
       const response = await axios.post('https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/register', registrationData);
       if (response.status === 200) {
-        history.push('/verification');
+        // Extract the user ID from the response
+        const { userId } = response.data;
+        // Redirect to the verification page with the user ID
+        history.push(`/verification/${userId}`);
       } else {
         console.error('Registration failed');
       }
@@ -30,7 +33,7 @@ const RegistrationForm = ({ onLoginClick }) => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="card mx-auto" style={{ maxWidth: '400px' }}>
         <div className="card-body">
           <h2 className="card-title text-center">Register</h2>
@@ -51,13 +54,19 @@ const RegistrationForm = ({ onLoginClick }) => {
               <label htmlFor="phone" className="form-label">Phone Number</label>
               <input type="tel" className="form-control" id="phone" name="phoneNumber" value={registrationData.phoneNumber} onChange={handleInputChange} required />
             </div>
-            <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+            <button
+              type="submit"
+              className="submit-btn"
+              disabled={loading}
+              
+            >
               {loading ? (
                 <ThreeDots color="#ffffff" height={20} width={20} />
               ) : (
                 'Register'
               )}
             </button>
+
           </form>
           <p className="text-center mt-3">Already have an account? <button className="btn btn-link" onClick={onLoginClick}>Login</button></p>
         </div>

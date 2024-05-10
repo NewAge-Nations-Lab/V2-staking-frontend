@@ -226,6 +226,18 @@ li:hover {
   color: #232c57;
 }
 
+.input-done {
+  color: blue; /* Change the color to your desired color */
+}
+
+
+.submit-btn {
+  background: #232c57;
+   color: white;
+   padding: 5px;
+   width: 100px;
+  }
+
 /* the amount button to automatically fill the amount on the input */
 
 .mr-2 {

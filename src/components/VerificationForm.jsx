@@ -1,55 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { ThreeDots } from 'react-loader-spinner'; // Import the ThreeDots loader component
-import { FaCheckCircle } from 'react-icons/fa'; // Import the FaCheckCircle icon for success
+import { ThreeDots } from 'react-loader-spinner';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const VerificationForm = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // State to track loading state
-  const [verificationSuccess, setVerificationSuccess] = useState(false); // State to track verification success
-  const [userId, setUserId] = useState(null); // State to store the user ID
-  const history = useHistory();
-
-  useEffect(() => {
-    // Fetch the user ID from the response of the registration route
-    axios.post('https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/register')
-      .then(response => {
-        const { userId } = response.data;
-        setUserId(userId);
-      })
-      .catch(error => {
-        console.error('Error fetching user ID:', error);
-      });
-  }, []); // Run this effect only once, on component mount
-
+  const [loading, setLoading] = useState(false);
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
+  
   const handleInputChange = (e) => {
     setVerificationCode(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true when verification request starts
+    setLoading(true);
     try {
-      const response = await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify/${userId}`, { code: verificationCode });
+      const token = localStorage.getItem('token'); // Get the authentication token from local storage
+      if (!token) {
+        throw new Error('Authentication token not found');
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
+        },
+      };
+      const response = await axios.post(
+        `https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify`,
+        { verifyCode: verificationCode },
+        config // Pass the config object with headers
+      );
       if (response.status === 201) {
-        // Verification succeeded
         setVerificationSuccess(true);
-        // Redirect to dashboard after successful verification
-        history.push('/dashboard');
       } else {
         setError('Verification failed. Please try again.');
       }
     } catch (error) {
+      console.error('Error during verification:', error);
       setError('Error during verification. Please try again.');
     } finally {
-      setLoading(false); // Set loading state back to false after verification request completes
+      setLoading(false);
     }
   };
+  ;
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <div className="card mx-auto" style={{ maxWidth: '400px' }}>
         <div className="card-body">
           <h2 className="card-title text-center">Verification</h2>
@@ -73,8 +70,7 @@ const VerificationForm = () => {
                   className="form-control mb-3"
                   placeholder="Verification Code"
                 />
-                {/* Conditionally render loader if loading state is true */}
-                <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                <button type="submit" className="submit-btn" disabled={loading}>
                   {loading ? (
                     <ThreeDots
                       color="#ffffff"

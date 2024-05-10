@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import axios from "axios";
 import logo from '../images/logo.jpg'
 
 function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -11,6 +18,15 @@ function NavBar() {
 
   const handleLinkClick = () => {
     setIsNavOpen(false); // Close the menu when a link is clicked
+  };
+
+  const checkAuthentication = async () => {
+    try {
+      const response = await axios.get("https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/check-auth");
+      setIsLoggedIn(response.data.loggedIn);
+    } catch (error) {
+      console.error("Error checking authentication:", error);
+    }
   };
 
   return (
@@ -40,8 +56,6 @@ function NavBar() {
                 Home
               </Link>
             </li>
-            
-
             <li className="nav-item">
               <Link
                 to="/AboutUs"
@@ -53,38 +67,54 @@ function NavBar() {
               </Link>
             </li>
             <li className="nav-item">
-                <a
-                  href="/"
-                  alt="contact us"
-                  className="nav-link text-light"
-                  style={{ fontSize: "16px", margin: "10px" }}
-                >
-                  How to Stake
-                </a>
-              </li>
+              <a
+                href="/"
+                alt="contact us"
+                className="nav-link text-light"
+                style={{ fontSize: "16px", margin: "10px" }}
+              >
+                How it works
+              </a>
+            </li>
           </ul>
           <div className="ml-auto">
             <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link
-                to="/Login"
-                className="nav-link text-light nav-link-hover"
-                style={{ fontSize: "16px", margin: "10px" }}
-                onClick={handleLinkClick}
-              >
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/Registration"
-                className="nav-link text-light nav-link-hover"
-                style={{ fontSize: "16px", margin: "10px" }}
-                onClick={handleLinkClick}
-              >
-                Register
-              </Link>
-            </li>
+              {isLoggedIn ? (
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle text-light" href="/#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <FaUserCircle style={{ fontSize: "24px" }} />
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><Link to="/Profile" className="dropdown-item" onClick={handleLinkClick}>Profile</Link></li>
+                    <li><Link to="/Settings" className="dropdown-item" onClick={handleLinkClick}>Settings</Link></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><Link to="/Logout" className="dropdown-item" onClick={handleLinkClick}>Logout</Link></li>
+                  </ul>
+                </li>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link
+                      to="/Login"
+                      className="nav-link text-light nav-link-hover"
+                      style={{ fontSize: "16px", margin: "10px" }}
+                      onClick={handleLinkClick}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/Registration"
+                      className="nav-link text-light nav-link-hover"
+                      style={{ fontSize: "16px", margin: "10px" }}
+                      onClick={handleLinkClick}
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
