@@ -16,6 +16,7 @@ const VerificationForm = () => {
         `https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify`,
         { verifyCode: verificationCode }
       );
+      console.log(verificationCode);
       if (response.status === 201) {
         // Verification Successful
         // You might want to handle this case if needed

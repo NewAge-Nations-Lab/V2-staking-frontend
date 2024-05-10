@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
 
 const RegistrationForm = ({ onLoginClick }) => {
-  const [registrationData, setRegistrationData] = useState({ email: '', password: '', username: '', phoneNumber: '' });
+  const [registrationData, setRegistrationData] = useState({ email: '', password: '', confirmPassword: '', username: '', phoneNumber: '' });
   const [loading, setLoading] = useState(false);
+  const [passwordMatchError, setPasswordMatchError] = useState(false); // State to track password match error
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -14,6 +15,13 @@ const RegistrationForm = ({ onLoginClick }) => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+
+    // Check if password and confirm password match
+    if (registrationData.password !== registrationData.confirmPassword) {
+      setPasswordMatchError(true);
+      return; // Exit registration process
+    }
+
     setLoading(true);
     try {
       const response = await axios.post('https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/register', registrationData);
@@ -51,6 +59,11 @@ const RegistrationForm = ({ onLoginClick }) => {
               <input type="password" className="form-control" id="password" name="password" value={registrationData.password} onChange={handleInputChange} required />
             </div>
             <div className="mb-3">
+              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+              <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" value={registrationData.confirmPassword} onChange={handleInputChange} required />
+              {passwordMatchError && <p className="text-danger">Passwords do not match</p>}
+            </div>
+            <div className="mb-3">
               <label htmlFor="phone" className="form-label">Phone Number</label>
               <input type="tel" className="form-control" id="phone" name="phoneNumber" value={registrationData.phoneNumber} onChange={handleInputChange} required />
             </div>
@@ -58,7 +71,6 @@ const RegistrationForm = ({ onLoginClick }) => {
               type="submit"
               className="submit-btn"
               disabled={loading}
-              
             >
               {loading ? (
                 <ThreeDots color="#ffffff" height={20} width={20} />
@@ -66,7 +78,6 @@ const RegistrationForm = ({ onLoginClick }) => {
                 'Register'
               )}
             </button>
-
           </form>
           <p className="text-center mt-3">Already have an account? <button className="btn btn-link" onClick={onLoginClick}>Login</button></p>
         </div>
