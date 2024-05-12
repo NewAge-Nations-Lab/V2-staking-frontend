@@ -3,7 +3,7 @@ import axios from 'axios'; // Import Axios for making HTTP requests
 import { useHistory } from 'react-router-dom'; // Import useHistory for routing
 import { ThreeDots } from 'react-loader-spinner'; // Import the Loader component
 
-const LoginForm = ({ onRegisterClick }) => {
+const LoginForm = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false); // State to track loading state
   const history = useHistory(); // Get the history object for routing
@@ -11,6 +11,12 @@ const LoginForm = ({ onRegisterClick }) => {
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
+
+  const onRegisterClick = ()=>{
+    history.push('/Registration');
+  }
+
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -58,7 +64,8 @@ const LoginForm = ({ onRegisterClick }) => {
           )}
         </button>
       </form>
-      <p>Don't have an account? <button className="link-button" onClick={onRegisterClick}>Register</button></p>
+      
+      <p className="text-center mt-3">Don't have an account? <button className="btn btn-link" onClick={onRegisterClick}>Register</button></p>
     </div>
   );
 };

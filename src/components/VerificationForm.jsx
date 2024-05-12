@@ -1,33 +1,44 @@
-// VerificationForm.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
-import { makeAuthenticatedRequest } from '../api'; 
 
-const VerificationForm = () => {
+const VerificationForm = ({ userId, email }) => {
   const [verificationCode, setVerificationCode] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [verificationMessage, setVerificationMessage] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log("userId in VerificationForm:", userId);
+    console.log("email in VerificationForm:", email);
+    // Update the verification message when email changes
+    if (email) {
+      setVerificationMessage(`A verification code has been sent to your email address: ${email}.`);
+    }
+  }, [userId, email]);
+
+  const handleInputChange = (e) => {
+    setVerificationCode(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+  
     try {
-      const response = await makeAuthenticatedRequest(
-        'https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify',
-        'POST',
-        { verifyCode: verificationCode }
-      );
-      console.log(verificationCode);
-      if (response && response.status === 201) {
-        // Verification Successful
-        // You might want to handle this case if needed
+      const response = await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify/${userId}`, { verifyCode: verificationCode });
+  
+      if (response.status === 201) {
+        // Verification successful, redirect to successpage or any other page
+        history.push('/verificationSuccess');
       } else {
-        setError('Verification failed. Please try again.');
+        setError('Verification failed');
       }
     } catch (error) {
-      console.error('Error during verification:', error);
-      setError('Error during verification. Please try again.');
+      setError('An error occurred while verifying');
+      console.error('Verification error:', error);
     } finally {
       setLoading(false);
     }
@@ -38,13 +49,13 @@ const VerificationForm = () => {
       <div className="card mx-auto" style={{ maxWidth: '400px' }}>
         <div className="card-body">
           <h2 className="card-title text-center">Verification</h2>
-          <p className="card-text text-center">Please enter the 6-digit verification code sent to your email:</p>
+          <p className="text-center text-info">{verificationMessage}</p>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
               name="verificationCode"
               value={verificationCode}
-              onChange={(e) => setVerificationCode(e.target.value)}
+              onChange={handleInputChange}
               maxLength={6}
               autoFocus
               className="form-control mb-3"

@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import RegistrationForm from "./components/RegistrationForm";
 import LoginForm from "./components/LoginForm";
 import VerificationForm from "./components/VerificationForm";
+import EmailVerificationSuccess from "./components/EmailVerificationSuccess";
 
 
 
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path="/Verification">
           <VerificationForm />
+        </Route>
+        <Route path="/verificationSuccess">
+          <EmailVerificationSuccess />
         </Route>
         
         
