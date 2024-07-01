@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
-import { useAuth } from '../components/AuthContext'; // Adjust the path as necessary
 
 const LoginForm = () => {
-  const { login } = useAuth(); // Access the login function from AuthContext
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -21,11 +20,15 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await login(loginData.username, loginData.password); // Use the login function from AuthContext
-      history.push('/dashboard'); // Redirect upon successful login
+      const response = await axios.post('https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/login', loginData);
+      if (response.status === 200) {
+        // Login successful, route user to dashboard
+        history.push('/dashboard');
+      } else {
+        console.error('Login failed');
+      }
     } catch (error) {
       console.error('Error during login:', error);
-      // Handle specific error cases or provide user feedback
     } finally {
       setLoading(false);
     }
