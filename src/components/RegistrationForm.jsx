@@ -5,7 +5,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import VerificationForm from './VerificationForm';
 
 const RegistrationForm = () => {
-  const [registrationData, setRegistrationData] = useState({ email: '', password: '', confirmPassword: '', username: '', phoneNumber: '' });
+  const [registrationData, setRegistrationData] = useState({ email: '', password: '', confirmPassword: '', username: '', phoneNumber: '', referralCode: '' });
   const [loading, setLoading] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState(false);
   const [userData, setUserData] = useState(null); // State to store the user data (including email)
@@ -15,9 +15,9 @@ const RegistrationForm = () => {
     setRegistrationData({ ...registrationData, [e.target.name]: e.target.value });
   };
 
-  const onLoginClick = ()=>{
+  const onLoginClick = () => {
     history.push('/Login');
-  }
+  };
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -71,8 +71,12 @@ const RegistrationForm = () => {
                   {passwordMatchError && <p className="text-danger">Passwords do not match</p>}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="phone" className="form-label">Phone Number</label>
-                  <input type="tel" className="form-control" id="phone" name="phoneNumber" value={registrationData.phoneNumber} onChange={handleInputChange} required />
+                  <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
+                  <input type="tel" className="form-control" id="phoneNumber" name="phoneNumber" value={registrationData.phoneNumber} onChange={handleInputChange} required />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="referralCode" className="form-label">Referral Code (optional)</label>
+                  <input type="text" placeholder='The referral code of your referral' className="form-control" id="referralCode" name="referralCode" value={registrationData.referralCode} onChange={handleInputChange} />
                 </div>
                 <button
                   type="submit"

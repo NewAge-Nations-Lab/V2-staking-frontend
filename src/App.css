@@ -279,3 +279,214 @@ h3 {
   }
 }
 
+
+
+
+
+/*  Imported CSS from other v1 */
+
+/* src/components/LandingPage.css */
+body {
+  background-color: #f8f9fa;
+}
+
+header img {
+  width: 150px;
+}
+
+footer h5 {
+  color: #6c757d;
+}
+
+footer a {
+  color: #007bff;
+}
+
+footer a:hover {
+  color: #0056b3;
+}
+
+
+
+
+.logo-name {
+  font-family: Arial, sans-serif; /* Use a common and clean sans-serif font */
+  font-size: 24px; /* Adjust the font size to your preference */
+  font-weight: bold; /* Make the text bold for a strong presence */
+  color: #1f2152; /* Use your chosen color */
+  text-transform: uppercase; /* Optionally, transform the text to uppercase for a bold look */
+}
+
+
+
+.front-modal {
+  margin: auto;
+  width: 50%;
+}
+
+.btn-primary {
+  background: #1f2152;
+}
+
+.btn-primary:hover{
+  border: 5px green solid;
+}
+
+.parent-layout {
+  display: flex;
+  gap: 10px;
+  
+  
+}
+
+
+
+.side-bar {
+  color: blue;
+  font-size: 1rem;
+  padding: 1rem;
+  border-right: 2px solid rgb(136, 136, 246);
+ 
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+  margin-top: 10px;
+  
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li:hover {
+  border-bottom: 2px orange solid;
+}
+
+header{
+  background-image: url("../src/images/header-background.jpg");
+  height: 200px;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+
+
+
+.staking-btn {
+
+  margin-top: 5px;
+}
+
+.staking-input {
+
+  border: solid orange 2px;
+  height: 35px;
+  border-radius: 10px;
+  
+  
+}
+
+.tx-area {
+  border: 1px orange solid;
+  padding: 50px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.border-style {
+  border: 2px #1f2152 solid;
+  border-radius: 10px;
+  margin: 0.5px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 5px;
+  width: 60%;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0px 8px 16px #1f2152;
+}
+
+
+.bottom-icon-container {
+  position: absolute;
+  bottom: -250px; 
+   
+}
+
+.bottom-icon {
+  font-size: 24px; 
+  margin: 10px;
+}
+
+.remove-decoration {
+  text-decoration: none;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+}
+
+
+
+
+/* Default style for the table (100% width) */
+.custom-table {
+  width: 100%;
+}
+
+/* Media query for larger screens (e.g., screens wider than 768px) */
+@media (min-width: 769px) {
+  .custom-table {
+    width: 50%; /* Set the desired width for larger screens */
+  }
+}
+
+
+/* App.css or a new CSS file */
+.bg-gradient-blue {
+  background: linear-gradient(90deg, rgba(33, 150, 243, 1) 0%, rgba(13, 71, 161, 1) 100%);
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  margin: 0 10px;
+}
+
+.navbar-text {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    justify-content: center;
+  }
+}
+
+
+
+.exchages-partner {
+  border: 2px solid rgb(162, 162, 246);
+  border-radius: 10px;
+  width: 300px;
+  height: 100px;
+}
+

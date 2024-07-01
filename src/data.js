@@ -1,0 +1,12 @@
+
+
+export const data = {
+    disclaimer: "NewAgeCoin is not available to residents or citizens of the United States, China, Britain, Afghanistan, India or any other countries where the possession, use, or trading of cryptocurrencies may be prohibited, regulated, or restricted by law. It is your responsibility to ensure that you are in compliance with the laws and regulations of your respective jurisdiction before participating in cryptocurrency investment or staking through the NewAgeCoin platform. NewAgeCoin may not be registered or regulated by the financial authorities in your country. It is offered on an exemption basis, and its use is subject to the terms and conditions outlined on the website. Cryptocurrency investments carry inherent risks, including but not limited to market volatility, loss of capital, and regulatory changes. You should conduct thorough research and consider your financial situation before engaging in cryptocurrency activities. Engaging in cryptocurrency activities in contravention of local laws and regulations may result in legal consequences. NewAgeCoin disclaims any liability for legal actions taken against users who do not adhere to applicable laws. Users of the NewAgeCoin website are solely responsible for understanding and complying with the legal requirements and regulations in their jurisdiction. NewAgeCoin will not be held responsible for any consequences arising from non-compliance. The information provided on the NewAgeCoin website is for informational purposes only and does not constitute financial, investment, or legal advice. You should consult with qualified professionals before making any investment decisions. By accessing and using the NewAgeCoin website, you acknowledge that you have read, understood, and agreed to the terms and conditions of this disclaimer. NewAgeCoin reserves the right to modify or update these terms without prior notice. It is your responsibility to review this disclaimer regularly for any changes. If you do not agree with the terms outlined above, you should refrain from using the NewAgeCoin website and its services.",
+    betaInfo: "NewAge Coin (NAC) staking is still in Beta Testing Mode, subject to final protocol audits!"
+};
+
+export const contractInfo = {
+    // tokenAddress: "0xe2bBAACCd8AC71E31A3f8b055F5F30ACd456745b",
+    tokenAddress: "0xA486a99109d21aC204a2219C8E40fb0733aFEC88", // contract address of the token for reward
+    contractAddress: "0xF82bD7F9A8fEB84B7454c16312652e87A5F555a2", // staking contract address
+}

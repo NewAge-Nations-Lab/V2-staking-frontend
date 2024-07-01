@@ -13,7 +13,6 @@ const VerificationForm = ({ userId, email }) => {
   useEffect(() => {
     console.log("userId in VerificationForm:", userId);
     console.log("email in VerificationForm:", email);
-    // Update the verification message when email changes
     if (email) {
       setVerificationMessage(`A verification code has been sent to your email address: ${email}.`);
     }
@@ -26,12 +25,11 @@ const VerificationForm = ({ userId, email }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       const response = await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify/${userId}`, { verifyCode: verificationCode });
-  
-      if (response.status === 201) {
-        // Verification successful, redirect to successpage or any other page
+
+      if (response.status === 200) {
         history.push('/verificationSuccess');
       } else {
         setError('Verification failed');
