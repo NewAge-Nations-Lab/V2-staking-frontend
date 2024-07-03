@@ -30,7 +30,7 @@ const Nav = () => {
       <div className="container-fluid">
         <Link className="navbar-brand text-white" to="/">NewAge Nations DAO</Link>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler custom-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -89,6 +89,17 @@ const Nav = () => {
                 Swap
               </a>
             </li>
+            <li className="nav-item">
+              <a
+                href='http://www.hvts.network/'
+                className="nav-link text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleLinkClick}
+              >
+                HVTS
+              </a>
+            </li>
           </ul>
           <div className="d-flex align-items-center">
             {isAuthenticated() ? (
@@ -113,8 +124,8 @@ const Nav = () => {
                   </ul>
                 </div>
                 <button onClick={connectWallet} className="btn btn-outline-light ms-3">
-              Connect Wallet
-            </button>
+                  Connect Wallet
+                </button>
               </>
             ) : (
               <>

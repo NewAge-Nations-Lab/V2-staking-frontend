@@ -30,7 +30,7 @@ const LandingPage = () => {
                 <a href="https://newagecoin.cash/doc/whitepaper.pdf" className="btn btn-primary btn-lg mx-2" target="_blank" rel="noopener noreferrer">
                     Whitepaper
                 </a>
-                <Link to="/staking" className="btn btn-success btn-lg mx-2">
+                <Link to="/login" className="btn btn-success btn-lg mx-2">
                     Launch dApp
                 </Link>
             </div>
