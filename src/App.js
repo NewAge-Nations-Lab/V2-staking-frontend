@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import ContactUs from "./pages/ContactUs";
-import Gallery from "./pages/Gallery";
+import Usecase from './pages/Usecase';
 import AboutUs from "./pages/AboutUs";
 import Dashboard from "./pages/Dashboard";
 import RegistrationForm from "./components/RegistrationForm";
@@ -37,7 +37,7 @@ function App() {
         <Route path="/verification" element={<VerificationForm />} />
         <Route path="/verificationSuccess" element={<EmailVerificationSuccess />} />
         <Route path="/contactus" element={<ContactUs />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/use-case" element={<Usecase />} />
       </Routes>
     
     </Router>

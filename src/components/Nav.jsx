@@ -54,7 +54,7 @@ const Nav = () => {
             <li className="nav-item">
               <Link
                 className="nav-link text-white"
-                to="/staking"
+                to="/dashboard"
                 onClick={handleLinkClick}
               >
                 Staking
@@ -63,7 +63,7 @@ const Nav = () => {
             <li className="nav-item">
               <Link
                 className="nav-link text-white"
-                to="/"
+                to="/#"
                 onClick={handleLinkClick}
               >
                 Subscription
