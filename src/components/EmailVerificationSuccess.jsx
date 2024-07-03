@@ -1,12 +1,12 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EmailVerificationSuccess = () => {
-  const history = useHistory();
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleLogin = () => {
     // Redirect the user to the login route
-    history.push('/login');
+    navigate('/login'); // Use navigate() to perform the redirect
   };
 
   return (
@@ -16,7 +16,7 @@ const EmailVerificationSuccess = () => {
           <h2 className="card-title text-center text-success">Email Verification Successful</h2>
           <p className="text-center">Your email address has been successfully verified.</p>
           <div className="text-center">
-            <button className="submit-btn" onClick={handleLogin}>Login</button>
+            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
           </div>
         </div>
       </div>

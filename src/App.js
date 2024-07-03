@@ -1,12 +1,7 @@
 import React from "react";
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import ContactUs from "./pages/ContactUs";
-
-
-
-import Footer from "./components/Footer";
-
 import Gallery from "./pages/Gallery";
 import AboutUs from "./pages/AboutUs";
 import Dashboard from "./pages/Dashboard";
@@ -15,56 +10,37 @@ import LoginForm from "./components/LoginForm";
 import VerificationForm from "./components/VerificationForm";
 import EmailVerificationSuccess from "./components/EmailVerificationSuccess";
 import LandingPage from "./pages/LandingPage";
+import ForgotPassword from "./components/ForgetPassword";
+import ResetPassword from "./components/ResetPassword";
 import Nav from "./components/Nav";
-
-
-
-
-
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
- 
-
   return (
-    <div>
+    <Router>
       <Nav />
-      <Switch>
-        <Route exact path="/">
-          <div>
-           <LandingPage />
-          </div>
-        </Route>
-        <Route path="/Dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/AboutUs">
-          <AboutUs />
-        </Route>
-        <Route path="/Registration">
-          <RegistrationForm />
-        </Route>
-        <Route path="/Login">
-          <LoginForm />
-        </Route>
-        <Route path="/Verification">
-          <VerificationForm />
-        </Route>
-        <Route path="/verificationSuccess">
-          <EmailVerificationSuccess />
-        </Route>
-        
-        
-        
-        
-        <Route path="/contactus">
-          <ContactUs />
-        </Route>
-        <Route path="/gallery">
-          <Gallery />
-        </Route>
-      </Switch>
-      {/* <Footer /> */}
-    </div>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <RequireAuth loginPath="/login">
+              <Dashboard />
+            </RequireAuth>
+          } 
+        />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/registration" element={<RegistrationForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/verification" element={<VerificationForm />} />
+        <Route path="/verificationSuccess" element={<EmailVerificationSuccess />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/gallery" element={<Gallery />} />
+      </Routes>
+    
+    </Router>
   );
 }
 

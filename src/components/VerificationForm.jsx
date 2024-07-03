@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  // Change from useHistory to useNavigate
 import { ThreeDots } from 'react-loader-spinner';
 
 const VerificationForm = ({ userId, email }) => {
@@ -8,7 +8,7 @@ const VerificationForm = ({ userId, email }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();  // Update from useHistory to useNavigate
 
   useEffect(() => {
     console.log("userId in VerificationForm:", userId);
@@ -30,7 +30,7 @@ const VerificationForm = ({ userId, email }) => {
       const response = await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/auth/verify/${userId}`, { verifyCode: verificationCode });
 
       if (response.status === 200) {
-        history.push('/verificationSuccess');
+        navigate('/verificationSuccess');  // Update from history.push to navigate
       } else {
         setError('Verification failed');
       }
@@ -59,7 +59,7 @@ const VerificationForm = ({ userId, email }) => {
               className="form-control mb-3"
               placeholder="Verification Code"
             />
-            <button type="submit" className="submit-btn" disabled={loading}>
+            <button type="submit" className="btn btn-primary" disabled={loading}>
               {loading ? (
                 <ThreeDots color="#ffffff" height={20} width={20} />
               ) : (

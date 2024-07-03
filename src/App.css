@@ -183,27 +183,37 @@ li:hover {
 .dashboard-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px;
+  gap: 1rem; /* Add some space between items */
 }
 
-.balance-block {
-  background-color: #f7f7f7;
-  padding: 20px;
-  margin: 20px;
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+.balance-block, .stake-block {
+  background-color: #f8f9fa; /* Adjust background color */
+  border-radius: 0.5rem; /* Add border radius */
+  padding: 1rem; /* Add padding */
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
-.stake-block {
-  background-color: #f7f7f7;
-  padding: 20px;
-  margin: 20px;
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+@media (max-width: 767.98px) {
+  .dashboard-container .balance-block,
+  .dashboard-container .stake-block {
+      flex: 1 1 100%; /* Full width on small screens */
+  }
 }
+
+@media (min-width: 768px) {
+  .dashboard-container .balance-block,
+  .dashboard-container .stake-block {
+      flex: 1 1 48%; /* Two items per row on medium and larger screens */
+  }
+}
+
+@media (min-width: 992px) {
+  .dashboard-container .balance-block,
+  .dashboard-container .stake-block {
+      flex: 1 1 23%; /* Four items per row on large screens */
+  }
+}
+
 
 .staking-input{
   border-radius: 10px;
