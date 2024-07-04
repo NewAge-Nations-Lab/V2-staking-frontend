@@ -2,57 +2,88 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthUser } from 'react-auth-kit';
 import { ThreeDots } from 'react-loader-spinner';
+import moment from 'moment';
 
 function Dashboard() {
-   
-    
+
+
     const [nacBalance, setNacBalance] = useState(0);
     const [daiBalance, setDaiBalance] = useState(0);
     const [nacRewardRates, setnacRewardRates] = useState(0);
     const [daiRewardRates, setDaiRewardRates] = useState(0);
     const [stakeCount, setStakeCount] = useState(0);
     const [referralId, setReferralId] = useState('');
+    const [stakingDuration, setStakingDuration] = useState()
     const [referrals, setReferrals] = useState([]);
+    const [referralPercentage, setReferralPercentage] = useState();
     const [loading, setLoading] = useState(true);
-    const [test, setTest] = useState();
+    const [diaEarningDays, setDaiEarningDays] = useState();
     const [error, setError] = useState()
 
-    
-  
 
-   
+
+
+
     const authUser = useAuthUser();  // Extract authentication user
     const userId = authUser()?.userId;
-    console.log(test);
-    
+   
 
-    
+   
+
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            if (!userId) throw new Error('No userId found');
-    
-            
-    
-            console.log('user id', userId);
-    
-            const response = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
-            setTest(response.data);
-            setNacBalance(response.data.profile.NacBalance)
-            setDaiBalance(response.data.profile.DaiBalance)
-            setStakeCount(response.data.profile.stakeCount)
-            setReferralId(response.data.profile.referralCode)
-          } catch (error) {
-            console.error("Error fetching data:", error);
-            setError(error);
-          } finally {
-            setLoading(false);
-          }
+            try {
+                if (!userId) throw new Error('No userId found');
+
+                console.log('user id', userId);
+
+               // Fetch user profile
+               const userProfileResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
+               
+               setNacBalance(userProfileResponse.data.profile.NacBalance);
+               setDaiBalance(userProfileResponse.data.profile.DaiBalance);
+               setStakeCount(userProfileResponse.data.profile.stakeCount);
+               setReferralId(userProfileResponse.data.profile.referralCode);
+
+               // Fetch staking configuration
+               const stakingConfigResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/staking-config`);
+               // Convert duration and daiEarningDays using moment
+               const duration = moment.duration(stakingConfigResponse.data.duration, 'days');
+               const daiDays = moment.duration(stakingConfigResponse.data.daiEarningDays, 'days');
+
+               const formattedStakingDuration = formatDuration(duration);
+               const formattedDaiEarningDays = formatDuration(daiDays);
+
+               setStakingDuration(formattedStakingDuration);
+               setDaiEarningDays(formattedDaiEarningDays);
+               setReferralPercentage(stakingConfigResponse.data.referralPercentage)
+               setDaiRewardRates(stakingConfigResponse.data.monthlyDaiRewardPercentage)
+               setnacRewardRates(stakingConfigResponse.data.dailyNacRewardPercentage)
+                    
+
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
         };
-    
+
         fetchData();
-      }, [ userId]);
+    }, [userId]);
+
+
+    const formatDuration = (duration) => {
+        if (duration.asMonths() >= 1) {
+            return `${duration.asMonths().toFixed(1)} months`;
+        } else if (duration.asWeeks() >= 1) {
+            return `${duration.asWeeks().toFixed(1)} weeks`;
+        } else {
+            return `${duration.asDays()} days`;
+        }
+    };
 
     const handleChange = (e) => {
         //handle change logi
@@ -62,12 +93,12 @@ function Dashboard() {
         // Deduct the stake amount from the NAC balance and place it in the in
     }
 
-    
 
-   
+
+
 
     const handleStaking = async () => {
-       //handle staking logic
+        //handle staking logic
     }
 
     const handleClaimReward = async () => {
@@ -109,11 +140,11 @@ function Dashboard() {
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Reward Rates</h3>
-                                
-                                <p className='m-0'>{nacRewardRates}% NAC - <small className="text-muted">Monthly</small></p>
-                                <p>{daiRewardRates}% DAI -- <small className="text-muted">Weekly</small>  </p>
-                                
-                                
+
+                                <p className='m-0'> NAC - <small className="text-muted">{nacRewardRates * 100}% </small></p>
+                                <p>DAI -- <small className="text-muted">{daiRewardRates * 100}% </small>  </p>
+
+
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Stake Count</h3>
@@ -126,8 +157,8 @@ function Dashboard() {
                                 <p>Max: 10000 NAC</p>
                                 <label htmlFor="amountInput" className="col-12">Amount (NAC):</label>
                                 <input
-                                    
-                                  
+
+
                                     className='staking-input col-12'
                                     type='text'
                                     inputMode='numeric'
@@ -136,9 +167,9 @@ function Dashboard() {
                                     <button className="mr-2">1000</button>
                                     <button className="ml-2">All</button>
                                 </div>
-                                
+
                                 <hr />
-                                
+
 
                                 <div className='estimated-container d-flex justify-content-center'>
                                     <div className='profit-estimate'><p>Daily</p>NAC</div>
@@ -147,32 +178,48 @@ function Dashboard() {
                                     <div className='profit-estimate'><p>Yearly</p> NAC</div>
                                 </div>
                                 <button
-                                    
+
                                     className='staking-btn'
                                 >
                                     STAKE
                                 </button>
-                                <div className='mt-5'>
-                                    <p className='col-12'>Available Rewards: 0 NAC</p>
-                                    <button className='btn btn-success'>CLAIM REWARD</button>
+                                <div className="row mt-5">
+                                    <div className="col-12 col-md-6 mb-3">
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <p className="mb-0">Available NAC Rewards:</p>
+                                            0
+                                            <button className="btn btn-success btn-sm">CLAIM</button>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-md-6 mb-3">
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <p className="mb-0">Available DAI Rewards:</p>
+                                            0
+                                            <button className="btn btn-success btn-sm">CLAIM</button>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                             <div className='col-md-6 d-flex flex-column align-items-center'>
-                                <div className='cards d-flex w-100 w-md-auto'>
-                                    
-                                    <p><p>Invite your friend and get 10% bonus</p>Your referral ID: {referralId}</p>
+                                <div className='cards  w-100 w-md-auto'>
+
+                                    <h6>Invite your friend and get {referralPercentage * 100}% bonus</h6>
+                                    <p>Referral ID: {referralId}</p>
 
                                 </div>
-                                <div className='cards d-flex w-100 w-md-auto'>
-                                    <p>Current Staking Duration</p>
-                                    <p></p>
+                                <div className='cards w-100 w-md-auto'>
+                                    <h6>Staking Duration</h6>
+                                    <p>{stakingDuration}</p>
                                 </div>
-                                <div className='cards d-flex w-100 w-md-auto'>
-                                    <p>Transaction History</p>
-                                    
+                                <div className='cards  w-100 w-md-auto'>
+                                    <h6>DAI Rewards Maturity:</h6>
+                                    <p className=''> After every {diaEarningDays} </p>
+
+
                                 </div>
                             </div>
-                            
+
                         </div>
                     </>
                 )}
