@@ -185,39 +185,37 @@ li:hover {
 }
 
 
+/* the balance containers blocks at the top of the dashboard    */
 .dashboard-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem; /* Add some space between items */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers */
 }
 
 .balance-block, .stake-block {
-  background-color: #f8f9fa; /* Adjust background color */
-  border-radius: 0.5rem; /* Add border radius */
-  padding: 1rem; /* Add padding */
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1); /* Add shadow */
-}
-
-@media (max-width: 767.98px) {
-  .dashboard-container .balance-block,
-  .dashboard-container .stake-block {
-      flex: 1 1 100%; /* Full width on small screens */
-  }
+  min-width: 100%; /* Ensure each block takes full width on small screens */
+  box-sizing: border-box;
+  background: linear-gradient(95deg, #feffff, #cdcffb);
+  
 }
 
 @media (min-width: 768px) {
-  .dashboard-container .balance-block,
-  .dashboard-container .stake-block {
-      flex: 1 1 48%; /* Two items per row on medium and larger screens */
+  .balance-block, .stake-block {
+      min-width: 50%; /* Adjust width for medium screens */
   }
 }
 
 @media (min-width: 992px) {
-  .dashboard-container .balance-block,
-  .dashboard-container .stake-block {
-      flex: 1 1 23%; /* Four items per row on large screens */
+  .balance-block, .stake-block {
+      min-width: 25%; /* Adjust width for large screens */
   }
 }
+
 
 
 .staking-input{

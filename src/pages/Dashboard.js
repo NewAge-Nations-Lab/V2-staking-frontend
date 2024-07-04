@@ -26,9 +26,9 @@ function Dashboard() {
 
     const authUser = useAuthUser();  // Extract authentication user
     const userId = authUser()?.userId;
-   
 
-   
+
+
 
 
     useEffect(() => {
@@ -38,29 +38,29 @@ function Dashboard() {
 
                 console.log('user id', userId);
 
-               // Fetch user profile
-               const userProfileResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
-               
-               setNacBalance(userProfileResponse.data.profile.NacBalance);
-               setDaiBalance(userProfileResponse.data.profile.DaiBalance);
-               setStakeCount(userProfileResponse.data.profile.stakeCount);
-               setReferralId(userProfileResponse.data.profile.referralCode);
+                // Fetch user profile
+                const userProfileResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
 
-               // Fetch staking configuration
-               const stakingConfigResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/staking-config`);
-               // Convert duration and daiEarningDays using moment
-               const duration = moment.duration(stakingConfigResponse.data.duration, 'days');
-               const daiDays = moment.duration(stakingConfigResponse.data.daiEarningDays, 'days');
+                setNacBalance(userProfileResponse.data.profile.NacBalance);
+                setDaiBalance(userProfileResponse.data.profile.DaiBalance);
+                setStakeCount(userProfileResponse.data.profile.stakeCount);
+                setReferralId(userProfileResponse.data.profile.referralCode);
 
-               const formattedStakingDuration = formatDuration(duration);
-               const formattedDaiEarningDays = formatDuration(daiDays);
+                // Fetch staking configuration
+                const stakingConfigResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/staking-config`);
+                // Convert duration and daiEarningDays using moment
+                const duration = moment.duration(stakingConfigResponse.data.duration, 'days');
+                const daiDays = moment.duration(stakingConfigResponse.data.daiEarningDays, 'days');
 
-               setStakingDuration(formattedStakingDuration);
-               setDaiEarningDays(formattedDaiEarningDays);
-               setReferralPercentage(stakingConfigResponse.data.referralPercentage)
-               setDaiRewardRates(stakingConfigResponse.data.monthlyDaiRewardPercentage)
-               setnacRewardRates(stakingConfigResponse.data.dailyNacRewardPercentage)
-                    
+                const formattedStakingDuration = formatDuration(duration);
+                const formattedDaiEarningDays = formatDuration(daiDays);
+
+                setStakingDuration(formattedStakingDuration);
+                setDaiEarningDays(formattedDaiEarningDays);
+                setReferralPercentage(stakingConfigResponse.data.referralPercentage)
+                setDaiRewardRates(stakingConfigResponse.data.monthlyDaiRewardPercentage)
+                setnacRewardRates(stakingConfigResponse.data.dailyNacRewardPercentage)
+
 
 
             } catch (error) {
@@ -129,7 +129,7 @@ function Dashboard() {
                     </div>
                 ) : (
                     <>
-                        <div className="dashboard-container row">
+                        <div className="dashboard-container row flex-nowrap">
                             <div className="balance-block col-md-6 col-lg-3">
                                 <h3>NAC Balance</h3>
                                 <p className='text-center'>{nacBalance}</p>
@@ -140,17 +140,15 @@ function Dashboard() {
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Reward Rates</h3>
-
-                                <p className='m-0'> NAC - <small className="text-muted">{nacRewardRates * 100}% </small></p>
-                                <p>DAI -- <small className="text-muted">{daiRewardRates * 100}% </small>  </p>
-
-
+                                <p className='m-0 text-center'> NAC - <small className="text-muted">{nacRewardRates * 100}% </small></p>
+                                <p className='text-center'>DAI - <small className="text-muted">{daiRewardRates * 100}% </small></p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Stake Count</h3>
                                 <p className='text-center'>{stakeCount}</p>
                             </div>
                         </div>
+
                         <div className='row mt-4'>
                             <div className='col-md-6 tx-area'>
                                 <p>Min: 100 NAC</p>
@@ -179,7 +177,7 @@ function Dashboard() {
                                 </div>
                                 <button
 
-                                    className='staking-btn'
+                                    className='btn btn-info w-100'
                                 >
                                     STAKE
                                 </button>
