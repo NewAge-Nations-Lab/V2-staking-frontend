@@ -201,6 +201,7 @@ li:hover {
   min-width: 100%; /* Ensure each block takes full width on small screens */
   box-sizing: border-box;
   background: linear-gradient(95deg, #feffff, #cdcffb);
+  border: 0.1px solid rgb(103, 103, 104);
   
 }
 
