@@ -11,6 +11,7 @@ function Dashboard() {
     const [daiBalance, setDaiBalance] = useState(0);
     const [nacRewardRates, setnacRewardRates] = useState(0);
     const [daiRewardRates, setDaiRewardRates] = useState(0);
+    const [nacUsdRate, setNacUsdRate] = useState(0);
     const [availableNacReward, setAvailableNacReward] = useState(6);
     const [availableDaiReward, setAvailableDaiReward] = useState(6);
     const [stakeCount, setStakeCount] = useState(0);
@@ -29,7 +30,7 @@ function Dashboard() {
     const authUser = useAuthUser();  // Extract authentication user
     const userId = authUser()?.userId;
 
-
+    
 
 
 
@@ -39,6 +40,10 @@ function Dashboard() {
                 if (!userId) throw new Error('No userId found');
 
                 console.log('user id', userId);
+
+                
+                
+              
 
                 // Fetch user profile
                 const userProfileResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
@@ -62,6 +67,7 @@ function Dashboard() {
                 setReferralPercentage(stakingConfigResponse.data.referralPercentage)
                 setDaiRewardRates(stakingConfigResponse.data.monthlyDaiRewardPercentage)
                 setnacRewardRates(stakingConfigResponse.data.dailyNacRewardPercentage)
+                setNacUsdRate(stakingConfigResponse.data.nacPriceUSD)
 
                 //fetch available reward balance
                 const daiRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-dai-reward/${userId}`)
@@ -149,9 +155,8 @@ function Dashboard() {
                                 <p className='text-center'>{daiBalance}</p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
-                                <h3>Reward Rates</h3>
-                                <p className='m-0 text-center'> NAC - <small className="text-muted">{nacRewardRates * 100}% </small></p>
-                                <p className='text-center'>DAI - <small className="text-muted">{daiRewardRates * 100}% </small></p>
+                                <h3>NAC USD Price</h3>
+                                ${nacUsdRate}
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Stake Count</h3>
@@ -161,6 +166,8 @@ function Dashboard() {
 
                         <div className='row mt-4'>
                             <div className='col-md-6 tx-area'>
+                            <p className=' '> NAC daily percentage - <small className="text-muted">{nacRewardRates * 100}% </small></p>
+                            <p className=''>DAI weekly percentage - <small className="text-muted">{daiRewardRates * 100}% </small></p>
                                 <label htmlFor="amountInput" className="col-12">Amount (NAC):</label>
                                 <input
 
