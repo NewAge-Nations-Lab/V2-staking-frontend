@@ -139,7 +139,7 @@ function Dashboard() {
                     </div>
                 ) : (
                     <>
-                        <div className="dashboard-container row flex-nowrap">
+                        <div className="dashboard-container row flex-nowrap mt-3">
                             <div className="balance-block col-md-6 col-lg-3">
                                 <h3>NAC Balance</h3>
                                 <p className='text-center'>{nacBalance}</p>

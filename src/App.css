@@ -191,6 +191,7 @@ li:hover {
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  
 }
 
 .dashboard-container::-webkit-scrollbar {
