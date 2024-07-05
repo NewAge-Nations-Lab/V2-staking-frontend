@@ -11,6 +11,8 @@ function Dashboard() {
     const [daiBalance, setDaiBalance] = useState(0);
     const [nacRewardRates, setnacRewardRates] = useState(0);
     const [daiRewardRates, setDaiRewardRates] = useState(0);
+    const [availableNacReward, setAvailableNacReward] = useState(6);
+    const [availableDaiReward, setAvailableDaiReward] = useState(6);
     const [stakeCount, setStakeCount] = useState(0);
     const [referralId, setReferralId] = useState('');
     const [stakingDuration, setStakingDuration] = useState()
@@ -61,7 +63,15 @@ function Dashboard() {
                 setDaiRewardRates(stakingConfigResponse.data.monthlyDaiRewardPercentage)
                 setnacRewardRates(stakingConfigResponse.data.dailyNacRewardPercentage)
 
+                //fetch available reward balance
+                const daiRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-dai-reward/${userId}`)
+                console.log();
+                setAvailableDaiReward(daiRewardBalanceResponse.data.availableDaiRewards)
 
+                 //fetch available reward balance
+                 const nacRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-nac-reward/${userId}`)
+                 console.log();
+                 setAvailableNacReward(nacRewardBalanceResponse.data.availableNacRewards)
 
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -151,8 +161,6 @@ function Dashboard() {
 
                         <div className='row mt-4'>
                             <div className='col-md-6 tx-area'>
-                                <p>Min: 100 NAC</p>
-                                <p>Max: 10000 NAC</p>
                                 <label htmlFor="amountInput" className="col-12">Amount (NAC):</label>
                                 <input
 
@@ -161,19 +169,16 @@ function Dashboard() {
                                     type='text'
                                     inputMode='numeric'
                                 />
-                                <div className="button-group col-12 d-flex justify-content-center">
-                                    <button className="mr-2">1000</button>
-                                    <button className="ml-2">All</button>
-                                </div>
+                               
 
                                 <hr />
 
-
+                                <p><strong>Profit calculation:</strong> Below is the break down when you stake _____</p>
                                 <div className='estimated-container d-flex justify-content-center'>
                                     <div className='profit-estimate'><p>Daily</p>NAC</div>
                                     <div className='profit-estimate'><p>Weekly</p> NAC</div>
-                                    <div className='profit-estimate'><p>Monthly</p> NAC</div>
-                                    <div className='profit-estimate'><p>Yearly</p> NAC</div>
+                                    <div className='profit-estimate'><p>Daily</p> DAI</div>
+                                    <div className='profit-estimate'><p>Weekly</p> DAI</div>
                                 </div>
                                 <button
 
@@ -185,14 +190,14 @@ function Dashboard() {
                                     <div className="col-12 col-md-6 mb-3">
                                         <div className="d-flex align-items-center justify-content-between">
                                             <p className="mb-0">Available NAC Rewards:</p>
-                                            0
+                                            {availableNacReward}
                                             <button className="btn btn-success btn-sm">CLAIM</button>
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 mb-3">
                                         <div className="d-flex align-items-center justify-content-between">
                                             <p className="mb-0">Available DAI Rewards:</p>
-                                            0
+                                            {availableDaiReward}
                                             <button className="btn btn-success btn-sm">CLAIM</button>
                                         </div>
                                     </div>
