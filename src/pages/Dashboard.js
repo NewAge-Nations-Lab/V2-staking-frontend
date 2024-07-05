@@ -26,6 +26,7 @@ function Dashboard() {
     const [weeklyNacReward, setWeeklyNacReward] = useState(0);
     const [weeklyDaiReward, setWeeklyDaiReward] = useState(0);
     const [monthlyDaiReward, setMonthlyDaiReward] = useState(0);
+    const [max, setMax] = useState(21000000)
     const [error, setError] = useState()
 
 
@@ -35,7 +36,7 @@ function Dashboard() {
     const authUser = useAuthUser();  // Extract authentication user
     const userId = authUser()?.userId;
 
-    
+
 
 
 
@@ -46,9 +47,9 @@ function Dashboard() {
 
                 console.log('user id', userId);
 
-                
-                
-              
+
+
+
 
                 // Fetch user profile
                 const userProfileResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/user/profile/${userId}`);
@@ -79,10 +80,10 @@ function Dashboard() {
                 console.log();
                 setAvailableDaiReward(daiRewardBalanceResponse.data.availableDaiRewards)
 
-                 //fetch available reward balance
-                 const nacRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-nac-reward/${userId}`)
-                 console.log();
-                 setAvailableNacReward(nacRewardBalanceResponse.data.availableNacRewards)
+                //fetch available reward balance
+                const nacRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-nac-reward/${userId}`)
+                console.log();
+                setAvailableNacReward(nacRewardBalanceResponse.data.availableNacRewards)
 
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -122,12 +123,16 @@ function Dashboard() {
             return;
         }
 
-        setStakeAmount(amount);
+        if (amount > max) {
+            setStakeAmount(max);
+        } else {
+            setStakeAmount(amount);
+        }
 
-        const dailyNac = amount * nacRewardRates;
+        const dailyNac = (amount > max ? max : amount) * nacRewardRates;
         const weeklyNac = dailyNac * 7;
 
-        const daiEquivalent = amount * nacUsdRate;
+        const daiEquivalent = (amount > max ? max : amount) * nacUsdRate;
         const weeklyDai = daiEquivalent * daiRewardRates / 4;
         const monthlyDai = daiEquivalent * daiRewardRates;
 
@@ -141,7 +146,7 @@ function Dashboard() {
         //handle change logi
     }
 
-   
+
 
 
 
@@ -213,12 +218,21 @@ function Dashboard() {
                                 <hr />
 
                                 <p><strong>Profit calculation:</strong> Below is the break down when you stake {stakeAmount} NAC</p>
-                                <div className='estimated-container d-flex justify-content-center'>
-                                    <div className='profit-estimate'><p>Daily</p>NAC {dailyNacReward.toFixed(2)}</div>
-                                    <div className='profit-estimate'><p>Weekly</p> NAC {weeklyNacReward.toFixed(2)}</div>
-                                    <div className='profit-estimate'><p>Weekly</p> DAI {weeklyDaiReward.toFixed(2)}</div>
-                                    <div className='profit-estimate'><p>Monthly</p> DAI {monthlyDaiReward.toFixed(2)}</div>
+                                <div className='estimated-container row text-center'>
+                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
+                                        <p>Daily</p>NAC {dailyNacReward.toFixed(2)}
+                                    </div>
+                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
+                                        <p>Weekly</p> NAC {weeklyNacReward.toFixed(2)}
+                                    </div>
+                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
+                                        <p>Weekly</p> DAI {weeklyDaiReward.toFixed(2)}
+                                    </div>
+                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
+                                        <p>Monthly</p> DAI {monthlyDaiReward.toFixed(2)}
+                                    </div>
                                 </div>
+
                                 <button
 
                                     className='btn btn-info w-100'
