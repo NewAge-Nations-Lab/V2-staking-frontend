@@ -218,19 +218,11 @@ function Dashboard() {
                                 <hr />
 
                                 <p><strong>Profit calculation:</strong> Below is the break down when you stake {stakeAmount} NAC</p>
-                                <div className='estimated-container row text-center'>
-                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
-                                        <p>Daily</p>NAC {dailyNacReward.toFixed(2)}
-                                    </div>
-                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
-                                        <p>Weekly</p> NAC {weeklyNacReward.toFixed(2)}
-                                    </div>
-                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
-                                        <p>Weekly</p> DAI {weeklyDaiReward.toFixed(2)}
-                                    </div>
-                                    <div className='profit-estimate col-12 col-sm-6 col-md-3'>
-                                        <p>Monthly</p> DAI {monthlyDaiReward.toFixed(2)}
-                                    </div>
+                                <div className='estimated-container d-flex justify-content-center'>
+                                    <div className='profit-estimate'><p>Daily</p>NAC {dailyNacReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Weekly</p> NAC {weeklyNacReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Weekly</p> DAI {weeklyDaiReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Monthly</p> DAI {monthlyDaiReward.toFixed(2)}</div>
                                 </div>
 
                                 <button
