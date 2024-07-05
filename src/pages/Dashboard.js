@@ -21,6 +21,11 @@ function Dashboard() {
     const [referralPercentage, setReferralPercentage] = useState();
     const [loading, setLoading] = useState(true);
     const [diaEarningDays, setDaiEarningDays] = useState();
+    const [stakeAmount, setStakeAmount] = useState(0);
+    const [dailyNacReward, setDailyNacReward] = useState(0);
+    const [weeklyNacReward, setWeeklyNacReward] = useState(0);
+    const [weeklyDaiReward, setWeeklyDaiReward] = useState(0);
+    const [monthlyDaiReward, setMonthlyDaiReward] = useState(0);
     const [error, setError] = useState()
 
 
@@ -101,14 +106,42 @@ function Dashboard() {
         }
     };
 
+
+    const handleStakeAmountChange = (e) => {
+        const value = e.target.value;
+
+        // Check if the input value is a number
+        const amount = parseFloat(value);
+
+        if (isNaN(amount)) {
+            setStakeAmount('');
+            setDailyNacReward(0);
+            setWeeklyNacReward(0);
+            setWeeklyDaiReward(0);
+            setMonthlyDaiReward(0);
+            return;
+        }
+
+        setStakeAmount(amount);
+
+        const dailyNac = amount * nacRewardRates;
+        const weeklyNac = dailyNac * 7;
+
+        const daiEquivalent = amount * nacUsdRate;
+        const weeklyDai = daiEquivalent * daiRewardRates / 4;
+        const monthlyDai = daiEquivalent * daiRewardRates;
+
+        setDailyNacReward(dailyNac);
+        setWeeklyNacReward(weeklyNac);
+        setWeeklyDaiReward(weeklyDai);
+        setMonthlyDaiReward(monthlyDai);
+    };
+
     const handleChange = (e) => {
         //handle change logi
     }
 
-    const handleStakeButtonClick = () => {
-        // Deduct the stake amount from the NAC balance and place it in the in
-    }
-
+   
 
 
 
@@ -152,11 +185,11 @@ function Dashboard() {
                             </div>
                             <div className="balance-block col-md-6 col-lg-3">
                                 <h3>DAI Balance</h3>
-                                <p className='text-center'>{daiBalance}</p>
+                                <p className='text-center'>${daiBalance}</p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>NAC USD Price</h3>
-                                ${nacUsdRate}
+                                <p className='text-center'>${nacUsdRate}</p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
                                 <h3>Stake Count</h3>
@@ -166,26 +199,25 @@ function Dashboard() {
 
                         <div className='row mt-4'>
                             <div className='col-md-6 tx-area'>
-                            <p className=' '> NAC daily percentage - <small className="text-muted">{nacRewardRates * 100}% </small></p>
-                            <p className=''>DAI weekly percentage - <small className="text-muted">{daiRewardRates * 100}% </small></p>
+                                <p className=' '> NAC daily percentage - <small className="text-muted">{nacRewardRates * 100}% </small></p>
+                                <p className=''>DAI weekly percentage - <small className="text-muted">{daiRewardRates * 100}% </small></p>
                                 <label htmlFor="amountInput" className="col-12">Amount (NAC):</label>
                                 <input
-
-
                                     className='staking-input col-12'
                                     type='text'
                                     inputMode='numeric'
+                                    value={stakeAmount}
+                                    onChange={handleStakeAmountChange}
                                 />
-                               
 
                                 <hr />
 
-                                <p><strong>Profit calculation:</strong> Below is the break down when you stake _____</p>
+                                <p><strong>Profit calculation:</strong> Below is the break down when you stake {stakeAmount} NAC</p>
                                 <div className='estimated-container d-flex justify-content-center'>
-                                    <div className='profit-estimate'><p>Daily</p>NAC</div>
-                                    <div className='profit-estimate'><p>Weekly</p> NAC</div>
-                                    <div className='profit-estimate'><p>Daily</p> DAI</div>
-                                    <div className='profit-estimate'><p>Weekly</p> DAI</div>
+                                    <div className='profit-estimate'><p>Daily</p>NAC {dailyNacReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Weekly</p> NAC {weeklyNacReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Weekly</p> DAI {weeklyDaiReward.toFixed(2)}</div>
+                                    <div className='profit-estimate'><p>Monthly</p> DAI {monthlyDaiReward.toFixed(2)}</div>
                                 </div>
                                 <button
 
