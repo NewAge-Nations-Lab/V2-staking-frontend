@@ -12,6 +12,7 @@ import EmailVerificationSuccess from "./components/EmailVerificationSuccess";
 import LandingPage from "./pages/LandingPage";
 import ForgotPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
+import ReferralList from "./pages/ReferralList"
 import Nav from "./components/Nav";
 import RequireAuth from "./components/RequireAuth";
 
@@ -38,6 +39,14 @@ function App() {
         <Route path="/verificationSuccess" element={<EmailVerificationSuccess />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/use-case" element={<Usecase />} />
+        <Route 
+          path="/referral-list" 
+          element={
+            <RequireAuth loginPath="/login">
+              <ReferralList />
+            </RequireAuth>
+          } 
+        />
       </Routes>
     
     </Router>

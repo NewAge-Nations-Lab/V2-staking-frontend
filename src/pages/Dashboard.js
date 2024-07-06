@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useAuthUser } from 'react-auth-kit';
 import { ThreeDots } from 'react-loader-spinner';
 import moment from 'moment';
@@ -27,8 +28,10 @@ function Dashboard() {
     const [weeklyNacReward, setWeeklyNacReward] = useState(0);
     const [weeklyDaiReward, setWeeklyDaiReward] = useState(0);
     const [monthlyDaiReward, setMonthlyDaiReward] = useState(0);
-    const [max, setMax] = useState(21000000)
-    const [error, setError] = useState()
+    const [max, setMax] = useState(21000000);
+    const [error, setError] = useState();
+    const [showReferralComponent, setShowReferralComponent] = useState(false); // State to toggle referral component
+
 
 
 
@@ -83,7 +86,6 @@ function Dashboard() {
 
                 //fetch available reward balance
                 const nacRewardBalanceResponse = await axios.get(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/available-nac-reward/${userId}`)
-                console.log();
                 setAvailableNacReward(nacRewardBalanceResponse.data.availableNacRewards)
 
             } catch (error) {
@@ -199,6 +201,14 @@ function Dashboard() {
             setError(error.response?.data?.message || 'An error occurred');
             setButtonLoading(false);
         }
+    };
+
+    const handleViewReferralsClick = () => {
+        setShowReferralComponent(true);
+    };
+
+    const handleGoBackClick = () => {
+        setShowReferralComponent(false);
     };
 
     return (
@@ -322,12 +332,21 @@ function Dashboard() {
                                 </div>
 
                             </div>
+
                             <div className='col-md-6 d-flex flex-column align-items-center'>
+
+                                {/* please chatgpt help modify this, when they click this card i want it to show ReferralComponent then it should return when they click go back on referal component */}
                                 <div className='cards  w-100 w-md-auto'>
 
                                     <h6>Invite your friend and get {referralPercentage * 100}% bonus</h6>
                                     <p>Referral ID: {referralId}</p>
-
+                                    
+                                    <p><Link
+                                        className=" text-info"
+                                        to="/referral-list"    
+                                    >
+                                        View referrals
+                                    </Link></p>
                                 </div>
                                 <div className='cards w-100 w-md-auto'>
                                     <h6>Staking Duration</h6>
@@ -348,5 +367,10 @@ function Dashboard() {
         </div>
     );
 }
+
+
+
+
+
 
 export default Dashboard;
