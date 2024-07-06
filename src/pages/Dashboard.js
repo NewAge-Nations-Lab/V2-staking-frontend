@@ -20,7 +20,7 @@ function Dashboard() {
     const [referrals, setReferrals] = useState([]);
     const [referralPercentage, setReferralPercentage] = useState();
     const [loading, setLoading] = useState(true);
-    const [buttonLoading, setButtonLoading] = useState(false); 
+    const [buttonLoading, setButtonLoading] = useState(false);
     const [diaEarningDays, setDaiEarningDays] = useState();
     const [stakeAmount, setStakeAmount] = useState(0);
     const [dailyNacReward, setDailyNacReward] = useState(0);
@@ -143,7 +143,7 @@ function Dashboard() {
         setMonthlyDaiReward(monthlyDai);
     };
 
-    
+
 
 
     const handleStake = async () => {
@@ -161,9 +161,45 @@ function Dashboard() {
         }
     };
 
-    const handleClaimReward = async () => {
-        //handle claim reward logic
-    }
+    const handleClaimNacReward = async () => {
+        if (availableNacReward <= 0) {
+            alert('No NAC rewards available to claim');
+            return;
+        }
+
+        try {
+            setButtonLoading(true);
+            await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/claim-nac-reward/${userId}`);
+            setError('');
+            alert('NAC reward claimed successfully');
+            setButtonLoading(false);
+            // Refresh data after claiming reward
+            window.location.reload();
+        } catch (error) {
+            setError(error.response?.data?.message || 'An error occurred');
+            setButtonLoading(false);
+        }
+    };
+
+    const handleClaimDaiReward = async () => {
+        if (availableDaiReward <= 0) {
+            alert('No DAI rewards available to claim');
+            return;
+        }
+
+        try {
+            setButtonLoading(true);
+            await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/claim-dai-reward/${userId}`);
+            setError('');
+            alert('DAI reward claimed successfully');
+            setButtonLoading(false);
+            // Refresh data after claiming reward
+            window.location.reload();
+        } catch (error) {
+            setError(error.response?.data?.message || 'An error occurred');
+            setButtonLoading(false);
+        }
+    };
 
     return (
         <div className='container-fluid parent-layout d-flex'>
@@ -175,7 +211,7 @@ function Dashboard() {
                     <li> <a href="/" className='text-info'>Referer Link</a></li>
                     <li> <a href="/" className='text-info'>Staking</a></li>
                 </ul>
-                
+
             </div>
             <div className='container col-md-10'>
                 {loading ? (
@@ -227,29 +263,60 @@ function Dashboard() {
                                 </div>
 
                                 <button
-                                        className="btn btn-primary w-100"
-                                        onClick={handleStake}
-                                        disabled={buttonLoading} // Disable button while staking
-                                    >
-                                        {buttonLoading ? (
+                                    className="btn btn-primary w-100 d-flex justify-content-center align-items-center"
+                                    onClick={handleStake}
+                                    disabled={buttonLoading} // Disable button while staking
+                                >
+                                    {buttonLoading ? (
+                                        <div className="d-flex justify-content-center align-items-center w-100">
                                             <ThreeDots color="#fff" height={20} width={20} />
-                                        ) : (
-                                            'Stake'
-                                        )}
-                                    </button>
+                                        </div>
+                                    ) : (
+                                        'Stake'
+                                    )}
+                                </button>
+
                                 <div className="row mt-5">
                                     <div className="col-12 col-md-6 mb-3">
                                         <div className="d-flex align-items-center justify-content-between">
                                             <p className="mb-0">Available NAC Rewards:</p>
                                             {availableNacReward}
-                                            <button className="btn btn-success btn-sm">CLAIM</button>
+
+                                            <button
+                                                className="btn btn-success btn-sm d-flex justify-content-center align-items-center"
+                                                onClick={handleClaimNacReward}
+                                                disabled={buttonLoading} // Disable button while staking
+                                            >
+                                                {buttonLoading ? (
+                                                    <div className="d-flex justify-content-center align-items-center w-100">
+                                                        <ThreeDots color="#fff" height={20} width={20} />
+                                                    </div>
+                                                ) : (
+                                                    'ClAIM'
+                                                )}
+                                            </button>
+
+
+
                                         </div>
                                     </div>
                                     <div className="col-12 col-md-6 mb-3">
                                         <div className="d-flex align-items-center justify-content-between">
                                             <p className="mb-0">Available DAI Rewards:</p>
                                             {availableDaiReward}
-                                            <button className="btn btn-success btn-sm">CLAIM</button>
+                                            <button
+                                                className="btn btn-success btn-sm d-flex justify-content-center align-items-center"
+                                                onClick={handleClaimDaiReward}
+                                                disabled={buttonLoading} // Disable button while staking
+                                            >
+                                                {buttonLoading ? (
+                                                    <div className="d-flex justify-content-center align-items-center w-100">
+                                                        <ThreeDots color="#fff" height={20} width={20} />
+                                                    </div>
+                                                ) : (
+                                                    'ClAIM'
+                                                )}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
