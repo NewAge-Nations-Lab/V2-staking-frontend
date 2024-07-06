@@ -169,12 +169,7 @@ function Dashboard() {
                     <li> <a href="/" className='text-info'>Referer Link</a></li>
                     <li> <a href="/" className='text-info'>Staking</a></li>
                 </ul>
-                <button className='mt-5 btn btn-danger' onClick={() => {
-                    localStorage.removeItem('authToken');
-                    window.location.href = '/login'; // Redirect to login after sign out
-                }}>
-                    Sign Out
-                </button>
+                
             </div>
             <div className='container col-md-10'>
                 {loading ? (
