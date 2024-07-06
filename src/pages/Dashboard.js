@@ -20,6 +20,7 @@ function Dashboard() {
     const [referrals, setReferrals] = useState([]);
     const [referralPercentage, setReferralPercentage] = useState();
     const [loading, setLoading] = useState(true);
+    const [buttonLoading, setButtonLoading] = useState(false); 
     const [diaEarningDays, setDaiEarningDays] = useState();
     const [stakeAmount, setStakeAmount] = useState(0);
     const [dailyNacReward, setDailyNacReward] = useState(0);
@@ -142,18 +143,23 @@ function Dashboard() {
         setMonthlyDaiReward(monthlyDai);
     };
 
-    const handleChange = (e) => {
-        //handle change logi
-    }
+    
 
 
-
-
-
-
-    const handleStaking = async () => {
-        //handle staking logic
-    }
+    const handleStake = async () => {
+        try {
+            setButtonLoading(true);
+            await axios.post(`https://quiet-ravine-44147-35b8bde85fde.herokuapp.com/api/stake/${userId}`, { nacAmount: stakeAmount });
+            setError('');
+            alert('Stake successful');
+            setButtonLoading(false);
+            // Refresh data after staking
+            window.location.reload();
+        } catch (error) {
+            setError(error.response?.data?.message || 'An error occurred');
+            setButtonLoading(false);
+        }
+    };
 
     const handleClaimReward = async () => {
         //handle claim reward logic
@@ -180,19 +186,19 @@ function Dashboard() {
                     <>
                         <div className="dashboard-container row flex-nowrap mt-3">
                             <div className="balance-block col-md-6 col-lg-3">
-                                <h3>NAC Balance</h3>
+                                <h3 className='text-center'>Total NAC Earned</h3>
                                 <p className='text-center'>{nacBalance}</p>
                             </div>
                             <div className="balance-block col-md-6 col-lg-3">
-                                <h3>DAI Balance</h3>
+                                <h3 className='text-center'>Total DAI Earned</h3>
                                 <p className='text-center'>${daiBalance}</p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
-                                <h3>NAC USD Price</h3>
+                                <h3 className='text-center'>NAC USD Price</h3>
                                 <p className='text-center'>${nacUsdRate}</p>
                             </div>
                             <div className="stake-block col-md-6 col-lg-3">
-                                <h3>Stake Count</h3>
+                                <h3 className='text-center'>Stake Count</h3>
                                 <p className='text-center'>{stakeCount}</p>
                             </div>
                         </div>
@@ -221,11 +227,16 @@ function Dashboard() {
                                 </div>
 
                                 <button
-
-                                    className='btn btn-info w-100'
-                                >
-                                    STAKE
-                                </button>
+                                        className="btn btn-primary w-100"
+                                        onClick={handleStake}
+                                        disabled={buttonLoading} // Disable button while staking
+                                    >
+                                        {buttonLoading ? (
+                                            <ThreeDots color="#fff" height={20} width={20} />
+                                        ) : (
+                                            'Stake'
+                                        )}
+                                    </button>
                                 <div className="row mt-5">
                                     <div className="col-12 col-md-6 mb-3">
                                         <div className="d-flex align-items-center justify-content-between">
