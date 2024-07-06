@@ -57,7 +57,7 @@ const Nav = () => {
                 to="/dashboard"
                 onClick={handleLinkClick}
               >
-                Staking
+                Dashboard
               </Link>
             </li>
             <li className="nav-item">
