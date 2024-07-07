@@ -16,6 +16,7 @@ import ReferralList from "./pages/ReferralList";
 import Nav from "./components/Nav";
 import RequireAuth from "./components/RequireAuth";
 import AdminPage from "./pages/AdminPage";
+import RequireAdmin from "./components/RequireAdmin";
 
 function App() {
   return (
@@ -44,7 +45,9 @@ function App() {
           path="/admin" 
           element={
             <RequireAuth loginPath="/login">
-              <AdminPage />
+              <RequireAdmin>
+                <AdminPage />
+              </RequireAdmin>
             </RequireAuth>
           } 
         />

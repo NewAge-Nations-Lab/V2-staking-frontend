@@ -39,7 +39,7 @@ const LoginForm = () => {
           token: token,
           expiresIn: expiresIn,
           tokenType: "Bearer",
-          authState: { username: user.username, userId: user.id } // Store userId
+          authState: { username: user.username, userId: user.id, isAdmin: user.isAdmin }// Store userId
         });
         if(user.isAdmin){
           navigate('/admin');
