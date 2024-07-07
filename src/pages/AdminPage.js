@@ -121,6 +121,7 @@ const AdminDashboard = () => {
                 value={config.nacRewardPercentage}
                 onChange={handleChange}
                 step="0.0001"
+                required
               />
             </div>
             <div className="mb-3">
@@ -135,6 +136,7 @@ const AdminDashboard = () => {
                 value={config.daiRewardPercentage}
                 onChange={handleChange}
                 step="0.01"
+                required
               />
             </div>
             <div className="mb-3">
@@ -148,6 +150,7 @@ const AdminDashboard = () => {
                 name="daiEarningDays"
                 value={config.daiEarningDays}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -161,6 +164,7 @@ const AdminDashboard = () => {
                 name="duration"
                 value={config.duration}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -175,6 +179,7 @@ const AdminDashboard = () => {
                 value={config.referralPercentage}
                 onChange={handleChange}
                 step="0.01"
+                required
               />
             </div>
             <button type="submit" className="btn btn-primary" disabled={loading}>
