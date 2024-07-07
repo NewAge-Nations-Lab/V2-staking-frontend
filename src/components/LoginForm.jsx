@@ -31,6 +31,9 @@ const LoginForm = () => {
       if (response.status === 200) {
         const { token, user } = response.data;
         const expiresIn = 3600; // 1 hour
+        
+        console.log(user.isAdmin);
+       
 
         signIn({
           token: token,
@@ -38,8 +41,12 @@ const LoginForm = () => {
           tokenType: "Bearer",
           authState: { username: user.username, userId: user.id } // Store userId
         });
-
-        navigate('/dashboard');
+        if(user.isAdmin){
+          navigate('/admin');
+        }else{
+          navigate('/dashboard');
+        }
+        
       } else {
         console.error('Login failed');
       }

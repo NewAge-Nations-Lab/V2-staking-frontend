@@ -12,9 +12,10 @@ import EmailVerificationSuccess from "./components/EmailVerificationSuccess";
 import LandingPage from "./pages/LandingPage";
 import ForgotPassword from "./components/ForgetPassword";
 import ResetPassword from "./components/ResetPassword";
-import ReferralList from "./pages/ReferralList"
+import ReferralList from "./pages/ReferralList";
 import Nav from "./components/Nav";
 import RequireAuth from "./components/RequireAuth";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/use-case" element={<Usecase />} />
         <Route 
+          path="/admin" 
+          element={
+            <RequireAuth loginPath="/login">
+              <AdminPage />
+            </RequireAuth>
+          } 
+        />
+        <Route 
           path="/referral-list" 
           element={
             <RequireAuth loginPath="/login">
@@ -48,7 +57,6 @@ function App() {
           } 
         />
       </Routes>
-    
     </Router>
   );
 }
